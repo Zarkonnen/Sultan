@@ -1,0 +1,59 @@
+name Fishing Rights
+intro Traditionally, only the people of the fishing quarter are allowed to fish in the lake. The merchants want this privilege extended to everyone.
+threshold fishermen 4
+
+option Extend the fishing privileges to everyone.
+    above More boats soon crowd the lake. The fishers complain but seem largely unaffected.
+    effect merchants + 2
+    below The merchants finance huge fishing vessels, driving the fishers out of business, and into increasing poverty.
+    effect merchants + 2 fishermen - 3
+    argument The bounties of the lake should belong to all the citizens.
+    argument The fishermen have grown lazy, and a little competition will do them no harm.
+
+option Keep the fishing privileges restricted fo the fishermen.
+    above The merchants grumble, but relent. The traditional way of things is retained.
+    effect fishermen + 1
+    below The merchants grumble, but relent. The traditional way of things is retained.
+    effect fishermen + 1
+    argument Are not the merchants rich enough already? Let the fishers keep their one source of prosperity.
+    argument Without the bounty of the lake to sustain them, the fishermen will descend into poverty.
+
+name Pollution
+intro The fishermen come to complain that the alchemists have been dumping the results of their experiments into the lake, making the fish taste funny.
+threshold alchemists 3
+
+option Ban the alchemists from polluting the lake.
+    above The alchemists complain, a little, but then continue with their experiments.
+    effect alchemists - 1 fishermen + 1
+    below The alchemists complain, a little, but then continue with their experiments.
+    effect alchemists - 1
+    argument Who knows what substances the alchemists work with? Pouring them into the lake is clearly unsafe.
+    argument The lake is the source of much of our prosperity. We must protect it.
+
+option Allow the alchemists to dump their substances.
+    above The alchemists are emboldened in their experiments. Soon, the fish from the lake acquire a decidedly bitter aftertaste.
+    effect alchemists + 1 fishermen - 2
+    below The alchemists continue their experiments. The fish keep tasting the same, pretty much.
+    effect alchemists + 1
+    argument The head of the alchemists' guild insists that the substances they work with are pretty harmless, and completely so when diluted into the lake.
+    argument The fishermen are simply passing the blame for less-than-fresh fish on to the alchemists.
+
+name Dyes
+intro The alchemists have developed an artificial red dye, which they claim is cheaper and more beautiful than the dye traditionally traded by the city's merchants. The merchants insist that this new dye is of inferior quality and will ruin their business.
+threshold alchemists 3
+
+option Let the alchemists sell their new dye.
+    above Eventually, the merchants come to appreciate the qualities of this new dye, and make plenty of money in its trade.
+    effect alchemists + 2 merchants + 2
+    below The new dye, though beautiful, washes off easily and causes itching. The alchemists, humiliated, return to their experiments and fumes. The merchants' reputation suffers.
+    effect alchemists - 2 merchants - 2
+    argument This represents an exciting new opportunity for trade in the city, but the merchants only think of short-term gains.
+    argument Let the alchemists sell their wares, and the merchants theirs.
+
+option Forbid this new dye.
+    above The merchants rejoice as this challenge to their position is removed. The alchemists, banned from selling the dye, continue using it for their own clothes.
+    effect alchemists - 1
+    below The alchemists complain surprisingly little about the ban. It may have something to do with the way the dye fails to adhere to cloth for any length of time.
+    effect alchemists - 1
+    argument The merchants have rather more experience in the practical use of dyes than the alchemists do. If they say it's bad, we should listen to them.
+    argument I for one would not want to wear cloth that has been submerged in an alchemist's concoction. I doubt this dye is as good as they claim.
