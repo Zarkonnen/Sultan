@@ -61,3 +61,59 @@ option Forbid this new dye.
     belowEffect alchemists - 2
     argument The merchants have rather more experience in the practical use of dyes than the alchemists do. If they say it's bad, we should listen to them.
     argument I for one would not want to wear cloth that has been submerged in an alchemist's concoction. I doubt this dye is as good as they claim.
+
+story Experiments by the sea
+intro The Alchemists want to conduct experiments with a newly devised concoction which can supposedly turn the scales of fish into stainless steel. Steel is in very low supply in the surrounding area, so this could benefit the economy. The fishermen however are worried this will make the fish inedible.
+threshold alchemists 4
+
+option Allow alchemists to conduct experiments.
+    above The experiments are successfull and the alchemists devised a new process for turning fish into steel. The economy thirves thanks to this new cheap source of steel, but most fish became inedible in the process and the fishermen are struggling.
+    aboveEffect alchemists + 1 merchants + 1 fishermen - 2
+    below The experiments fail and the alchemists reputation sinks. But luckily, most fish stays unaffected and the fishermen are able to continue business as usual.
+    belowEffect alchemists - 1
+    argument The alchemists have proven to be very skilled and this experiment could have strong benefits for the economy.
+    
+option Ban alchemists from conducting experiments.
+    above The alchemists are upset that their briliance is not properly recognized and resentment builds amongst their ranks. The fishermen on the other hand are relieved.
+    aboveEffect alchemists - 2 fishermen + 1
+    below The alchemists are annoyed that they are not allowed to practice and improve their craft. The fishermen on the other hand are relieved.
+    belowEffect alchemists - 1 fishermen + 1
+    argument The possible consequences are too severe. It's best to not risk anything.
+
+
+story Tentacle fetish
+intro The Merchants demand the fishermen to provide more giant squids, since they fetch a high price on the japanese fetish market. They want to introduce a minimum quota the fishermen need to oblige, but the fishermen complain that huntig giant squids is dangerous and fear for their safety.
+threshold fishermen 5
+
+option Institute minimum quota.
+    above The fishermen complain, but ultimately the squid hunt turned out to be easier than expected. The economy improves thanks to the incresed supply of squids.
+    aboveEffect merchants + 2
+    below The fishermen complain and refuse to put themselves in danger. They stopped huntig giant squids alltogether and the economy suffers.
+    belowEffect fishermen - 1 merchants - 1
+    argument The fetish marekt is booming and the increased supply of squid could greatly improve the economy.
+
+option Refuse quota.
+    above The merchants grumble but continue business as usual. Meanwhile the squid price increases and the fishermen are able to make a little bit more profit.
+    aboveEffect fishermen + 1
+    below The merchants grumble but continue business as usual.
+    belowEffect fishermen + 0
+    argument Giant squids are dangerous to hunt! Losing our fishermen for a little bump in the economy is not worth the risk.
+
+
+story Aphrodisiac
+intro The alchemists complain that the merchants refuse to sell them horse testicles. The merchants say the alchemists plan to use it to concoct an aphrodisiac that would compete with their most profitable line of products and insist that they should be allowed to refuse a sale if it's against their interests.
+threshold merchants 4
+
+option Force merchants to sell available products to anyone.
+    above The merchants are furious but ultimately powerless and are forced to sell the testicles to the alchemists. The aphrodisiac proves to be very effective and becomes a big seller, diminishing the profits of the merchants. As a result, the merchants stop stocking horse testicles completely, forcing the alchemists to stop their aphrodisiac endeavor.
+    aboveEffect merchants - 2
+    below The merchants are forced to sell the testicles to the alchemists. Due to the low quality of the horse testicles however, word spreads that the aphrodisiac is ineffective and the alchemists reputation sinks while the merchants stay unaffected.
+    belowEffect alchemists - 1
+    argument The merchants should not be allowed to discrimante. Everyone should be able to buy what they want as long as the supply is there. Competition is good for a healthy economy.
+
+option Allow merchants to refuse sale.
+    above The alchemists grumble, but quickly move on to their next experiment. The merchants are pleased to have gained the right to refuse sales and use this new ruling to their advantage.
+    aboveEffect merchants + 1
+    below The alchemists grumble, but quickly move on to their next experiment. The merchants are pleased to have gained the right to refuse sales and heavily use this new ruling to their advantage.
+    belowEffect merchants + 2
+    argument Forcing merchants to act against their interests might cause them to reduce supply on certain items that are needed for our city.
