@@ -114,6 +114,23 @@ var sultan = (function() {
         
         console.log(JSON.stringify(advisors));
         console.log(JSON.stringify(variables));
+        console.log("");
+        
+        stories.forEach(function(story) {
+            console.log(story.title);
+            console.log(story.intro);
+            story.options.forEach(function(option) {
+                console.log("Option: " + option.text);
+            });
+            advisors.forEach(function(advisor) {
+                console.log(advisor.name + ": " + getAdvice(advisor, story));
+            });
+            var optionIndex = Math.floor(Math.random() * story.options.length);
+            console.log("Choice: " + story.options[optionIndex].text);
+            console.log(chooseOption(story, optionIndex));
+            console.log(JSON.stringify(variables));
+            console.log("");
+        });
     };
     
     var isAbove = function(story) {
@@ -121,7 +138,11 @@ var sultan = (function() {
     };
     
     var chooseOption = function(story, optionIndex) {
-    
+        var effects = story.options[optionIndex][isAbove(story) ? "aboveEffect" : "belowEffect"];
+        effects.forEach(function(e) {
+            variables[e.variable] += e.delta;
+        });
+        return story.options[optionIndex][isAbove(story) ? "above" : "below"];
     };
     
     var optionQuality = function(priority, story, optionIndex) {
@@ -132,13 +153,19 @@ var sultan = (function() {
             });
             return relevantEffects.length == 0 ? 0 : relevantEffects[0].delta;
         } else {
-            return effects.reduce(function(acc, e) { return acc + e.delta; }, 0);
+            if (story.thresholdVariable == priority.variable) {
+                return effects.reduce(function(acc, e) { return acc + e.delta; }, 0);
+            } else {
+                return 0;
+            }
         }
     };
     
     var getAdvice = function(advisor, story) {
+        console.log(advisor.name + " on " + story.title);
         for (var i = 0; i < advisor.priorities.length; i++) {
             var priority = advisor.priorities[i];
+            console.log("Priority " + (i + 1) + ": " + (priority.type == "truth" ? "Truth about " : "Loyalty to ") + priority.variable);
             var bestAdvice = -1;
             var bestAdviceQuality = -100000;
             var worstAdviceQuality = 100000;
@@ -153,6 +180,8 @@ var sultan = (function() {
             if (bestAdvice != -1 && bestAdviceQuality > worstAdviceQuality) {
                 var option = story.options[bestAdvice];
                 return option.arguments[Math.floor(Math.random() * option.arguments.length)];
+            } else {
+                console.log("Does not apply.");
             }
         }
         return "I don't know.";
