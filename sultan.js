@@ -1,5 +1,8 @@
 var sultan = (function() {
     var stories = [];
+    var variables = {};
+    var variableNames = [];
+    var advisors = [];
 
     var load = function() {
         jQuery.ajax({
@@ -27,6 +30,13 @@ var sultan = (function() {
             var op = l.split(" ", 1)[0];
             var data = l.substring(op.length + 1);
             switch (op) {
+                case "variable":
+                    var varName = data.split(" ")[0];
+                    var varMin = parseInt(data.split(" ")[1]);
+                    var varMax = parseInt(data.split(" ")[2]);
+                    variables[varName] = Math.floor(Math.random() * (varMax - varMin + 1)) + varMin;
+                    variableNames.push(varName);
+                    break;
                 case "story":
                     if (story != null) {
                         if (option != null) {
@@ -75,7 +85,31 @@ var sultan = (function() {
             }
             stories.push(story);
         }
-        console.log(JSON.stringify(stories));
+        
+        // Generate advisors.
+        advisors = ["Alice", "Bob"].map(function(name) {
+            var firstLoyalty = Math.random() > 0.5;
+            var firstVariable = variableNames[Math.floor(Math.random() * variableNames.length)];
+            var remainingVariables = variableNames.filter(function(v) { return v != firstVariable });
+            var secondVariable = remainingVariables[Math.floor(Math.random() * remainingVariables.length)];
+            return {
+                name: name,
+                priorities: [
+                    {
+                        type: firstLoyalty ? "loyalty" : "truth",
+                        variable: firstVariable
+                    },
+                    {
+                        type: firstLoyalty ? "truth" : "loyalty",
+                        variable: secondVariable
+                    }
+                ],
+                revealedAdvice: {}
+            };
+        });
+        
+        console.log(JSON.stringify(advisors));
+        console.log(JSON.stringify(variables));
     };
     
     return {

@@ -1,3 +1,7 @@
+variable fishermen 2 4
+variable merchants 3 5
+variable alchemists 1 6
+
 story Fishing Rights
 intro Traditionally, only the people of the fishing quarter are allowed to fish in the lake. The merchants want this privilege extended to everyone.
 threshold fishermen 4
