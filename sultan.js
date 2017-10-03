@@ -15,7 +15,11 @@ var sultan = (function() {
         s = s.split(" ");
         var fx = [];
         for (var i = 0; i < s.length; i += 3) {
-            fx.push({ variable: s[i], operator: s[i + 1], amount: parseInt(s[i + 2]) });
+            if (s[i + 1] == "+") {
+                fx.push({ variable: s[i], delta: parseInt(s[i + 2])});
+            } else {
+                fx.push({ variable: s[i], delta: 0 - parseInt(s[i + 2])});
+            }
         }
         return fx;
     };
@@ -112,7 +116,51 @@ var sultan = (function() {
         console.log(JSON.stringify(variables));
     };
     
+    var isAbove = function(story) {
+        return variables[story.thresholdVariable] > story.thresholdAmount;
+    };
+    
+    var chooseOption = function(story, optionIndex) {
+    
+    };
+    
+    var optionQuality = function(priority, story, optionIndex) {
+        var effects = story.options[optionIndex][isAbove(story) ? "aboveEffect" : "belowEffect"];
+        if (priority.type == "loyalty") {
+            var relevantEffects = effects.filter(function(e) {
+                return e.variable == priority.variable;
+            });
+            return relevantEffects.length == 0 ? 0 : relevantEffects[0].delta;
+        } else {
+            return effects.reduce(function(acc, e) { return acc + e.delta; }, 0);
+        }
+    };
+    
+    var getAdvice = function(advisor, story) {
+        for (var i = 0; i < advisor.priorities.length; i++) {
+            var priority = advisor.priorities[i];
+            var bestAdvice = -1;
+            var bestAdviceQuality = -100000;
+            var worstAdviceQuality = 100000;
+            for (var j = 0; j < story.options.length; j++) {
+                var quality = optionQuality(priority, story, j);
+                if (quality > bestAdviceQuality || bestAdvice == -1) {
+                    bestAdvice = j;
+                    bestAdviceQuality = quality;
+                }
+                worstAdviceQuality = Math.min(worstAdviceQuality, quality);
+            }
+            if (bestAdvice != -1 && bestAdviceQuality > worstAdviceQuality) {
+                var option = story.options[bestAdvice];
+                return option.arguments[Math.floor(Math.random() * option.arguments.length)];
+            }
+        }
+        return "I don't know.";
+    };
+    
     return {
-        load: load
+        load: load,
+        chooseOption: chooseOption,
+        getAdvice: getAdvice
     }
 })();

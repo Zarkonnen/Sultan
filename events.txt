@@ -47,10 +47,10 @@ intro The alchemists have developed an artificial red dye, which they claim is c
 threshold alchemists 3
 
 option Let the alchemists sell their new dye.
-    above Eventually, the merchants come to appreciate the qualities of this new dye, and make plenty of money in its trade.
-    aboveEffect alchemists + 2 merchants + 2
+    above While the merchants lose some sales, the alchemists earn plenty of fame and money from the trade in this new dye.
+    aboveEffect alchemists + 3 merchants - 1
     below The new dye, though beautiful, washes off easily and causes itching. The alchemists, humiliated, return to their experiments and fumes. The merchants' reputation suffers.
-    belowEffect alchemists - 2 merchants - 2
+    belowEffect alchemists - 3 merchants - 2
     argument This represents an exciting new opportunity for trade in the city, but the merchants only think of short-term gains.
     argument Let the alchemists sell their wares, and the merchants theirs.
 
@@ -58,6 +58,6 @@ option Forbid this new dye.
     above The merchants rejoice as this challenge to their position is removed. The alchemists, banned from selling the dye, continue using it for their own clothes.
     aboveEffect alchemists - 1
     below The alchemists complain surprisingly little about the ban. It may have something to do with the way the dye fails to adhere to cloth for any length of time.
-    belowEffect alchemists - 1
+    belowEffect alchemists - 2
     argument The merchants have rather more experience in the practical use of dyes than the alchemists do. If they say it's bad, we should listen to them.
     argument I for one would not want to wear cloth that has been submerged in an alchemist's concoction. I doubt this dye is as good as they claim.
