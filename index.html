@@ -4,6 +4,7 @@
         <title>Sultan</title>
         <script src="jquery-3.2.1.min.js"></script>
         <script src="sultan.js"></script>
+        <script src="gui.js"></script>
         <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
         <style>
             body {
@@ -14,15 +15,26 @@
                 padding: 2em;
                 line-height: 1.4;
             }
-            .button {
+            div.button {
                 color: #f68121;
                 cursor: pointer;
+                margin-bottom: 1em;
+                margin-top: 1em;
+            }
+            div.advice {
+                margin-bottom: 1em;
+                margin-top: 1em;
+                color: #6a9347;
+            }
+            div.outcome, div.chosenOption, div.notChosenOption {
+                margin-bottom: 1em;
+                margin-top: 1em;
             }
             .button:hover {
                 color: white;
                 text-shadow: 0px 0px 0.5em #e1dca4;
             }
-            .disabled {
+            .disabled, .notChosenOption {
                 color: #885021;
             }
             h1 {
@@ -39,11 +51,8 @@
     <body>
         <div id="content">
             <h1>SULTAN</h1>
-            Mene mene tekel upharsin. Sic dolor amet here are some words to test what it looks like. Hi, Sultan!
-            <div class="button">Do a thing.</div>
-            <div class="disabled">Disabled.</div>
             <script>
-                sultan.load();
+                sultan.load(gui.showStoryList);
             </script>
         </div>
     </body>

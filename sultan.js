@@ -1,13 +1,17 @@
 var sultan = (function() {
+    var day = 0;
+    var storyIndex = 0;
     var stories = [];
+    var pastStories = [];
+    var currentStories = [];
     var variables = {};
     var variableNames = [];
     var advisors = [];
 
-    var load = function() {
+    var load = function(callback) {
         jQuery.ajax({
             url: "events.txt",
-            complete: loaded
+            complete: function(response) { loaded(response, callback); }
         });
     };
     
@@ -24,10 +28,11 @@ var sultan = (function() {
         return fx;
     };
     
-    var loaded = function(response) {
+    var loaded = function(response, callback) {
         var lines = response.responseText.split("\n");
         var story = null;
         var option = null;
+        var idCounter = 1;
         lines.forEach(function(l) {
             l = l.trim();
             if (l.length == 0) { return; }
@@ -49,7 +54,7 @@ var sultan = (function() {
                         }
                         stories.push(story);
                     }
-                    story = { title: data, options: [] };
+                    story = { title: data, options: [], id: idCounter++ };
                     break;
                 case "intro":
                     story.intro = data;
@@ -91,12 +96,12 @@ var sultan = (function() {
         }
         
         // Generate advisors.
-        advisors = ["Alice", "Bob"].map(function(name) {
+         ["Alice", "Bob"].forEach(function(name) {
             var firstLoyalty = Math.random() > 0.5;
             var firstVariable = variableNames[Math.floor(Math.random() * variableNames.length)];
             var remainingVariables = variableNames.filter(function(v) { return v != firstVariable });
             var secondVariable = remainingVariables[Math.floor(Math.random() * remainingVariables.length)];
-            return {
+            advisors.push({
                 name: name,
                 priorities: [
                     {
@@ -109,32 +114,26 @@ var sultan = (function() {
                     }
                 ],
                 revealedAdvice: {}
-            };
+            });
         });
         
-        console.log(JSON.stringify(advisors));
-        console.log(JSON.stringify(variables));
-        console.log("");
-        
-        stories.forEach(function(story) {
-            console.log(story.title);
-            console.log(story.intro);
-            story.options.forEach(function(option) {
-                console.log("Option: " + option.text);
-            });
-            advisors.forEach(function(advisor) {
-                console.log(advisor.name + ": " + getAdvice(advisor, story));
-            });
-            var optionIndex = Math.floor(Math.random() * story.options.length);
-            console.log("Choice: " + story.options[optionIndex].text);
-            console.log(chooseOption(story, optionIndex));
-            console.log(JSON.stringify(variables));
-            console.log("");
-        });
+        nextDay();
+        callback();
     };
     
     var isAbove = function(story) {
         return variables[story.thresholdVariable] > story.thresholdAmount;
+    };
+    
+    var nextDay = function() {
+        variableNames.forEach(function(v) {
+            console.log(v + ": " + variables[v]);
+        });
+        day++;
+        while (currentStories.length < day && storyIndex < stories.length) {
+            currentStories.push(stories[storyIndex]);
+            storyIndex++;
+        }
     };
     
     var chooseOption = function(story, optionIndex) {
@@ -142,7 +141,11 @@ var sultan = (function() {
         effects.forEach(function(e) {
             variables[e.variable] += e.delta;
         });
-        return story.options[optionIndex][isAbove(story) ? "above" : "below"];
+        pastStories.push({story: story, optionIndex: optionIndex});
+        currentStories.splice(currentStories.indexOf(story), 1);
+        nextDay();
+        story.outcome = story.options[optionIndex][isAbove(story) ? "above" : "below"];
+        return story.outcome;
     };
     
     var optionQuality = function(priority, story, optionIndex) {
@@ -188,6 +191,9 @@ var sultan = (function() {
     };
     
     return {
+        advisors: advisors,
+        currentStories: currentStories,
+        pastStories: pastStories,
         load: load,
         chooseOption: chooseOption,
         getAdvice: getAdvice
