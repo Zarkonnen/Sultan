@@ -1,5 +1,6 @@
 var sultan = (function() {
     var day = 0;
+    var availableActions = 0;
     var storyIndex = 0;
     var stories = [];
     var pastStories = [];
@@ -126,6 +127,7 @@ var sultan = (function() {
     };
     
     var nextDay = function() {
+        availableActions = 2;
         variableNames.forEach(function(v) {
             console.log(v + ": " + variables[v]);
         });
@@ -165,6 +167,7 @@ var sultan = (function() {
     };
     
     var getAdvice = function(advisor, story) {
+        availableActions--;
         console.log(advisor.name + " on " + story.title);
         for (var i = 0; i < advisor.priorities.length; i++) {
             var priority = advisor.priorities[i];
@@ -190,12 +193,15 @@ var sultan = (function() {
         return "I don't know.";
     };
     
+    var getAvailableActions = function() { return availableActions; };
+    
     return {
         advisors: advisors,
         currentStories: currentStories,
         pastStories: pastStories,
         load: load,
         chooseOption: chooseOption,
-        getAdvice: getAdvice
+        getAdvice: getAdvice,
+        getAvailableActions: getAvailableActions
     }
 })();

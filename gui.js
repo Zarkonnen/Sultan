@@ -16,6 +16,7 @@ var gui = (function() {
 
     var showStoryList = function() {
         var c = '<h1>SULTAN</h1>';
+        c += '<div class="intro">Available actions today: ' + sultan.getAvailableActions() + '</div>';
         for (var i = 0; i < sultan.currentStories.length; i++) {
             var story = sultan.currentStories[i];
             c += '<div class="button" onClick="gui.showStory(' + i + ')">' + story.intro + '</div>';
@@ -27,6 +28,7 @@ var gui = (function() {
     var showStory = function(storyIndex) {
         var story = sultan.currentStories[storyIndex];
         var c = '<h1>' + story.title.toUpperCase() + '</h1>';
+        c += '<div class="intro">Available actions today: ' + sultan.getAvailableActions() + '</div>';
         c += '<div class="intro">' + story.intro + '</div>';
         c += '<div class="button" onClick="gui.showStoryList()">Back</div>';
         for (var i = 0; i < sultan.advisors.length; i++) {
@@ -34,7 +36,11 @@ var gui = (function() {
             if (advisor.revealedAdvice[story.id]) {
                 c += '<div class="advice">' + advisor.name + ': ' + advisor.revealedAdvice[story.id] + '</div>';
             } else {
-                c += '<div class="button" onClick="gui.getAdvice(' + storyIndex + ', ' + i + ')">Ask ' + advisor.name + '</div>';
+                if (sultan.getAvailableActions() > 0) {
+                    c += '<div class="button" onClick="gui.getAdvice(' + storyIndex + ', ' + i + ')">Ask ' + advisor.name + '</div>';
+                } else {
+                    c += '<div class="disabled">Ask ' + advisor.name + '</div>';
+                }
             }
         }
         for (var i = 0; i < story.options.length; i++) {
