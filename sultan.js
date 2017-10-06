@@ -149,6 +149,19 @@ var sultan = (function() {
         }
     };
     
+    var effectsSummary = function(effects) {
+        var s = [];
+        effects.forEach(function(e) {
+            if (e.delta > 0) {
+                s.push("<br>" + e.variable.toUpperCase() + " + " + e.delta);
+            }
+            if (e.delta < 0) {
+                s.push("<br>" + e.variable.toUpperCase() + " - " + -e.delta);
+            }
+        });
+        return s.sort().join("");
+    };
+    
     var chooseOption = function(story, optionIndex) {
         var effects = story.options[optionIndex][isAbove(story) ? "aboveEffect" : "belowEffect"];
         effects.forEach(function(e) {
@@ -157,7 +170,7 @@ var sultan = (function() {
         pastStories.push({story: story, optionIndex: optionIndex});
         currentStories.splice(currentStories.indexOf(story), 1);
         nextDay();
-        story.outcome = story.options[optionIndex][isAbove(story) ? "above" : "below"];
+        story.outcome = story.options[optionIndex][isAbove(story) ? "above" : "below"] + effectsSummary(effects);
         return story.outcome;
     };
     
