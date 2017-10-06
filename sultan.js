@@ -108,13 +108,15 @@ var sultan = (function() {
         shuffle(stories);
         
         // Generate advisors.
-         ["Abya", "Beorn"].forEach(function(name) {
+        var advIDCounter = 1;
+        ["Abya", "Beorn"].forEach(function(name) {
             var firstLoyalty = Math.random() > 0.5;
             var firstVariable = variableNames[Math.floor(Math.random() * variableNames.length)];
             var remainingVariables = variableNames.filter(function(v) { return v != firstVariable });
             var secondVariable = remainingVariables[Math.floor(Math.random() * remainingVariables.length)];
             advisors.push({
                 name: name,
+                id: advIDCounter++,
                 priorities: [
                     {
                         type: firstLoyalty ? "loyalty" : "truth",
@@ -168,9 +170,10 @@ var sultan = (function() {
             variables[e.variable] += e.delta;
         });
         pastStories.push({story: story, optionIndex: optionIndex});
+        story.optionIndex = optionIndex;
         currentStories.splice(currentStories.indexOf(story), 1);
         nextDay();
-        story.outcome = story.options[optionIndex][isAbove(story) ? "above" : "below"] + effectsSummary(effects);
+        story.outcome = story.options[optionIndex][isAbove(story) ? "above" : "below"];// + effectsSummary(effects);
         return story.outcome;
     };
     
@@ -209,7 +212,7 @@ var sultan = (function() {
             }
             if (bestAdvice != -1 && bestAdviceQuality > worstAdviceQuality) {
                 var option = story.options[bestAdvice];
-                return option.arguments[Math.floor(Math.random() * option.arguments.length)];
+                return option.arguments[advisor.id % option.arguments.length];
             } else {
                 console.log("Does not apply.");
             }

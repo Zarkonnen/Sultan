@@ -27,7 +27,7 @@ intro The fishermen come to complain that the alchemists have been dumping the r
 threshold alchemists 3
 
 option Ban the alchemists from polluting the lake.
-    above The alchemists complain, a little, but then continue with their experiments.
+    above The alchemists complain, a little, but then continue with their experiments. And the local fish does taste a bit better now.
     aboveEffect alchemists - 1 fishermen + 1
     below The alchemists complain, a little, but then continue with their experiments.
     belowEffect alchemists - 1
@@ -49,14 +49,14 @@ threshold alchemists 3
 option Let the alchemists sell their new dye.
     above While the merchants lose some sales, the alchemists earn plenty of fame and money from the trade in this new dye.
     aboveEffect alchemists + 3 merchants - 1
-    below The new dye, though beautiful, washes off easily and causes itching. The alchemists, humiliated, return to their experiments and fumes. The merchants' reputation suffers.
+    below The new dye, though beautiful, washes off easily and causes itching. The alchemists, humiliated, return to their experiments and fumes. The merchants' reputation suffers also.
     belowEffect alchemists - 3 merchants - 2
     argument This represents an exciting new opportunity for trade in the city, but the merchants only think of short-term gains.
     argument Let the alchemists sell their wares, and the merchants theirs.
 
 option Forbid this new dye.
     above The merchants rejoice as this challenge to their position is removed. The alchemists, banned from selling the dye, continue using it for their own clothes.
-    aboveEffect alchemists - 1
+    aboveEffect alchemists - 1 merchants + 1
     below The alchemists complain surprisingly little about the ban. It may have something to do with the way the dye fails to adhere to cloth for any length of time.
     belowEffect alchemists - 2
     argument The merchants have rather more experience in the practical use of dyes than the alchemists do. If they say it's bad, we should listen to them.
@@ -71,7 +71,8 @@ option Allow alchemists to conduct experiments.
     aboveEffect alchemists + 1 merchants + 1 fishermen - 2
     below The experiments fail and the alchemists' reputation sinks. But luckily, most fish stays unaffected and the fishermen are able to continue business as usual.
     belowEffect alchemists - 1
-    argument The alchemists have proven to be very skilled and this experiment could have strong benefits for the economy.
+    argument The alchemists have proven to be very skilled.
+    argument This experiment could bring us great riches.
     
 option Ban alchemists from conducting experiments.
     above The alchemists are upset that their briliance is not properly recognized and resentment builds amongst their ranks. The fishermen on the other hand are relieved.
@@ -79,6 +80,7 @@ option Ban alchemists from conducting experiments.
     below The alchemists are annoyed that they are not allowed to practice and improve their craft. The fishermen on the other hand are relieved.
     belowEffect alchemists - 1 fishermen + 1
     argument The possible consequences are too severe. It's best to not risk anything.
+    argument I would not let the alchemists anywhere near our food supply.
 
 story Tentacles
 intro The Merchants demand that the fishermen provide more giant squid, since they fetch a high price on markets to the east. They want to introduce a minimum quota, but the fishermen complain that hunting giant squid is dangerous.
@@ -96,8 +98,8 @@ option Refuse quota.
     aboveEffect fishermen + 1
     below The merchants grumble but continue business as usual.
     belowEffect fishermen + 0
-    argument Giant squid are dangerous to hunt! Losing our fishermen to satisfy the merchants' greed is not worth the risk.
-
+    argument Giant squid are dangerous to hunt!
+    argument Losing our fishermen to satisfy the merchants' greed is not worth the risk.
 
 story Aphrodisiac
 intro The alchemists complain that the merchants refuse to sell them horse testicles. The merchants say the alchemists plan to use it to concoct an aphrodisiac that would compete with their most profitable line of products and insist that they should be allowed to refuse a sale if it's against their interests.
@@ -106,7 +108,7 @@ threshold merchants 4
 option Force merchants to sell available products to anyone.
     above The merchants are furious but ultimately powerless and are forced to sell the testicles to the alchemists. The aphrodisiac proves to be very effective and becomes a big seller, diminishing the profits of the merchants. As a result, the merchants stop stocking horse testicles completely, forcing the alchemists to stop their aphrodisiac endeavor.
     aboveEffect merchants - 2
-    below The merchants are forced to sell the testicles to the alchemists. Due to the low quality of the horse testicles however, word spreads that the aphrodisiac is ineffective and the alchemists' reputation sinks while the merchants stay unaffected.
+    below The merchants are forced to sell the testicles to the alchemists. Due to the low quality of the horse testicles however, word spreads that the aphrodisiac is ineffective and the alchemists' reputation sinks while the merchants' stays unaffected.
     belowEffect alchemists - 1
     argument The merchants should not be allowed to form a monopoly.
     argument Everyone should be able to buy what they want as long as the supply is there. Competition is good for a healthy economy.
@@ -117,14 +119,15 @@ option Allow merchants to refuse sale.
     below The alchemists grumble, but quickly move on to their next experiment. The merchants are pleased to have gained the right to refuse sales and heavily use this new ruling to their advantage.
     belowEffect merchants + 2
     argument Forcing merchants to act against their interests might cause them to reduce supply on certain items that are needed for our city.
+    argument The merchants should be allowed to trade with whom they please.
 
 story Re-Animator
 intro An alchemist has re-animated the wife of a local merchant. The merchant sees strange, moving things behind her eyes and refuses payment.
 threshold alchemists 5
 
 option Make the merchant pay for this miraculous resurrection.
-    above The alchemist receives his pay. The merchant eventually becomes used to his wife's new demeanour.
-    aboveEffect alchemists + 1
+    above The merchant eventually becomes used to his wife's new demeanour. The alchemist receives his pay, and becomes greatly renowned.
+    aboveEffect alchemists + 3
     below The alchemist receives his pay. A few days later, the body of the merchant is found floating in the harbour.
     belowEffect merchants - 3
     argument A few coins are a small price to pay for this miracle.
@@ -183,7 +186,7 @@ threshold alchemists 5
 
 option Punish the apprentice for his theft.
     above The apprentice is whipped publicly and made to repent for his crimes. The senior alchemists watch on with grim satisfaction.
-    aboveEffect alchemists + 2
+    aboveEffect alchemists + 1
     below The apprentice is whipped publicly and made to repent for his crimes. In the end, it is his former master who is ostracised by the other alchemists.
     belowEffect alchemists - 1
     argument If we allow apprentices to steal their masters' secrets, chaos will result.
@@ -199,20 +202,20 @@ option Allow the apprentice to use the formulas he helped create.
     
 story Pricing
 intro Two fishermen are repeatedly undercutting each other for supplying a particularly delicious kind of fish to a merchant.
-threshold merchants 3
+threshold fishermen 3
 
 option Stop the price war by instituting a minimum price for this fish.
-    above You stop the fishermen from ruining each other.
-    aboveEffect fishermen + 1
-    below While the minimum price does stop the fishermen from fighting, the merchants had been relying on the cheap prices for their business. Now, there are more fish than anyone wants to buy at the required price.
-    belowEffect fishermen - 1 merchants - 2
+    above While the minimum price does stop the fishermen from fighting, the merchants had been relying on the cheap prices for their business. Now, there are more fish than anyone wants to buy at the required price.
+    aboveEffect fishermen - 1 merchants - 2
+    below You stop the fishermen from ruining each other.
+    belowEffect fishermen + 1
     argument I have tasted this fish myself, and it is so delicious that it surely deserves to be paid for properly.
     argument The merchant is rubbing his hands in glee, knowing that the low fish prices mean massive profits for him.
 
 option Leave them to their fishy business.
-    above Soon, the fish is so cheap that the fishermen must work constantly to make a living. The merchants profit quite well, though.
-    aboveEffect fishermen - 2 merchants + 2
-    below Soon, the fish is so cheap that the fishermen must work constantly to make a living. The merchants profit quite well, though.
-    belowEffect fishermen - 1 merchants + 1
+    above The two fishermen eventually stop their price war, but not before the merchant has made a tidy profit.
+    aboveEffect merchants + 1
+    below Soon, the fish is so cheap that the fishermen must work constantly to make a living. The merchant profits greatly.
+    belowEffect fishermen - 2 merchants + 2
     argument I really think this is their own problem, and not something you need to get involved in.
     argument Let them buy and sell as they please.

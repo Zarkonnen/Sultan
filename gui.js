@@ -51,6 +51,21 @@ var gui = (function() {
     
     var showResult = function(story, resultText) {
         var c = '<h1>' + story.title.toUpperCase() + '</h1>';
+        c += '<div>' + story.intro + '</div>';
+        for (var j = 0; j < sultan.advisors.length; j++) {
+            var advisor = sultan.advisors[j];
+            if (advisor.revealedAdvice[story.id]) {
+                c += '<div class="advice">' + advisor.name + ': ' + advisor.revealedAdvice[story.id] + '</div>';
+            }
+        }
+        for (var j = 0; j < story.options.length; j++) {
+            var option = story.options[j];
+            if (j == story.optionIndex) {
+                c += '<div class="chosenOption">' + option.text + '</div>';
+            } else {
+                c += '<div class="notChosenOption">' + option.text + '</div>';
+            }
+        }
         c += '<div>' + resultText + '</div>';
         c += '<div class="button" onClick="gui.showStoryList()">The next day...</div>';
         show(c);

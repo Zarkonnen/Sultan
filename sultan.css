@@ -28,6 +28,9 @@ div.outcome, div.chosenOption, div.notChosenOption, div.intro, div.disabled {
 .disabled, .notChosenOption {
     color: #885021;
 }
+.chosenOption {
+    text-shadow: 0px 0px 0.5em #e1dca4;
+}
 h1 {
     margin: 0;
     margin-bottom: 0.5em;
