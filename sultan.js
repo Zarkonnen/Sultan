@@ -8,6 +8,16 @@ var sultan = (function() {
     var variables = {};
     var variableNames = [];
     var advisors = [];
+    
+    var shuffle = function(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+            j = Math.floor(Math.random() * i);
+            x = a[i - 1];
+            a[i - 1] = a[j];
+            a[j] = x;
+        }
+    };
 
     var load = function(callback) {
         jQuery.ajax({
@@ -95,9 +105,10 @@ var sultan = (function() {
             }
             stories.push(story);
         }
+        shuffle(stories);
         
         // Generate advisors.
-         ["Alice", "Bob"].forEach(function(name) {
+         ["Abya", "Beorn"].forEach(function(name) {
             var firstLoyalty = Math.random() > 0.5;
             var firstVariable = variableNames[Math.floor(Math.random() * variableNames.length)];
             var remainingVariables = variableNames.filter(function(v) { return v != firstVariable });
